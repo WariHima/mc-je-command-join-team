@@ -1,0 +1,32 @@
+1.チーム分け
+
+
+execute if score $GameStatus BedWParameter matches 1 unless score $TeamJoinCount BedWCount = $MaxMem BedWParameter run team join BedWRed @p[tag=BedWSanka,team=] 
+反復
+scoreboard players add $TeamJoinCount BedWCount 1
+チェーン、条件付き
+team join BedWBlue @p[tag=BedWSanka,team=]
+チェーン、条件付き
+team join BedWGreen @p[tag=BedWSanka,team=]
+チェーン、条件付き
+team join BedWYellow @p[tag=BedWSanka,team=]
+チェーン、条件付き
+execute if score $GameStatus BedWParameter matches 1 if score $TeamJoinCount BedWCount = $MaxMem BedWParameter run scoreboard players set $Start BedWParameter 1 
+チェーン
+
+BedWarsがスタート状態でカウントが最大人数と等しくないときタグが付いていない参加者に赤のタグをつける
+上のコマンドが成功したらカウントに１追加
+上のコマンドが成功したらどのチームにも所属していない参加者を青のチームに入れる
+上のコマンドが成功したらどのチームにも所属していない参加者を緑のチームに入れる
+
+上のコマンドが成功したらどのチームにも所属していない参加者を黄色チームに入れる
+（"参加人数が8人の時に”が抜けている）
+
+カウントが最大人数と同じときスタートフラグを立てる
+
+2人=1+1
+3人=1+1+1
+4人=1+1+1+1
+6人=2+2+2
+8人=2+2+2+2
+

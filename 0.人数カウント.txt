@@ -1,0 +1,52 @@
+0.人数カウント
+
+
+execute unless score $SankaCount BedWCount matches 8 run tag @p add BedWSanka
+
+
+execute store result score $SankaCount BedWCount if entity @a[tag=BedWSanka]
+反復
+execute if score $SankaCount BedWCount matches 13.. run scoreboard players set $MaxMem BedWParameter 4
+チェーン
+execute if score $SankaCount BedWCount matches 9..12 run scoreboard players set $MaxMem BedWParameter 3
+チェーン
+execute if score $SankaCount BedWCount matches 6..8 run scoreboard players set $MaxMem BedWParameter 2
+チェーン
+execute if score $SankaCount BedWCount matches ..4 run scoreboard players set $MaxMem BedWParameter 1
+チェーン
+
+
+
+
+execute if score $GameStatus BedWParameter matches 0 if score $BedWTimer BedWCount matches 0 if score $SankaCount BedWCount matches 2.. run scoreboard players set $GameStatus BedWParameter 1
+反復
+
+
+execute if score $GameStatus BedWParameter matches 0 if score $BedWTimer BedWCount matches 0 if score $SankaCount BedWCount matches 1 run scoreboard players set $BedWTimer BedWCount 30 
+反復
+xp set @a[tag=BedWSanka] 30 levels
+チェーン、条件付き
+
+
+execute if score $GameStatus BedWParameter matches 0 if score $Clock BedWCount matches 19 unless score $BedWTimer BedWCount matches 0 run scoreboard players remove $BedWTimer BedWCount 1
+反復
+xp add @a[tag=BedWSanka] -1 levels
+チェーン、条件付
+
+
+ベッドウォーズの参加者が8人でない時最も近くの人に参加者タグをつける
+
+参加者の人数をカウント
+参加者が6人以上の時チームの定員を2にする
+参加者が4人以下の時チームの定員を1にする
+
+ゲームが待機状態のとき19tick(1s-リセット実行tick)ごとにタイマーを１減らす
+上のコマンドが成功したらレベルを１減らす
+
+タイマーが１以下でかつ人数が１人のときタイマーを30にセット
+上のコマンドが成功したらを30にセット
+
+ゲームが待機状態でかつタイマーが0でかつ参加者が２人以上の時ゲームをスタートする
+
+
+
