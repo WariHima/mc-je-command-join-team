@@ -1,0 +1,1 @@
+# mc-je-command-join-team
